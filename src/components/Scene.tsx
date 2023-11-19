@@ -8,7 +8,7 @@ const Scene: React.FC<Props> = ({}) => {
   return (
     <>
       <Pokeball />
-      {/* <Ground /> */}
+      <Ground />
     </>
   );
 };
