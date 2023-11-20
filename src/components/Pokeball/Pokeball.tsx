@@ -1,11 +1,130 @@
 import { useGLTF } from "@react-three/drei";
 import { GLTFPokeball } from "../../types/types";
+import { useEffect, useState } from "react";
+import { Group } from "three/examples/jsm/libs/tween.module.js";
+import { Object3D, Vector3 } from "three";
+
+const objects = [
+  {
+    name: "pillow",
+    position: [-0.207, 0.026, 0.471],
+    rotation: [0, -0.023, 0],
+    scale: 1,
+    meshes: [
+      {
+        id: "pillow_1",
+        cast_shadow: true,
+        reveive_shadow: true,
+        geometry: "Cube.geometry",
+        material: "pillow",
+      },
+      {
+        id: "pillow_2",
+        cast_shadow: true,
+        reveive_shadow: true,
+        geometry: "Cube_1.geometry",
+        material: "black_stroke",
+      },
+    ],
+  },
+  {
+    name: "bulbasaur",
+    position: [0.387, -0.098, -0.259],
+    rotation: [-Math.PI / 2, 0, 1.077],
+    scale: 0.039,
+    meshes: [
+      {
+        id: "bulbasaur_1",
+        cast_shadow: true,
+        reveive_shadow: true,
+        geometry: "Object_2_002.geometry",
+        material: "lambert5SG",
+        position: [0, 0, 0.151],
+      },
+      {
+        id: "bulbasaur_2",
+        cast_shadow: true,
+        reveive_shadow: true,
+        geometry: "Object_3.geometry",
+        material: "lambert6SG",
+        position: [0, 0, 0.151],
+      },
+    ],
+  },
+  {
+    name: "bulbasaur",
+    position: [0.387, -0.098, -0.259],
+    rotation: [-Math.PI / 2, 0, 1.077],
+    scale: 0.039,
+    meshes: [
+      {
+        id: "bulbasaur_1",
+        cast_shadow: true,
+        reveive_shadow: true,
+        geometry: "Object_2_002.geometry",
+        material: "lambert5SG",
+        position: [0, 0, 0.151],
+      },
+      {
+        id: "bulbasaur_2",
+        cast_shadow: true,
+        reveive_shadow: true,
+        geometry: "Object_3.geometry",
+        material: "lambert6SG",
+        position: [0, 0, 0.151],
+      },
+    ],
+  },
+];
 
 export function Pokeball() {
   const { nodes, materials } = useGLTF("./pockeball.glb") as GLTFPokeball;
+  const [isSceneRotate, setIsSceneRotate] = useState(false);
+  const [grabObject, setGrabObject] = useState(false);
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.code === "AltLeft") {
+      setIsSceneRotate(true);
+    }
+  };
+
+  const handleKeyUp = () => {
+    setIsSceneRotate(false);
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.addEventListener("keyup", handleKeyUp);
+    };
+  }, []);
+
+  const mouseCoords = (x: number, y: number) => {
+    let vector = new Vector3();
+    vector.set(
+      (x / window.innerWidth) * 2 - 1,
+      -(y / window.innerHeight) * 2 + 1,
+      0
+    );
+    return vector;
+  };
+
+  const moveObject = (object: Object3D, x: number, y: number) => {
+    const getCoords = mouseCoords(x, y);
+
+    object.position.set(getCoords.x, getCoords.y, object.position.z);
+  };
+
   return (
     <group dispose={null}>
-      <group position={[-0.207, 0.026, 0.471]} rotation={[0, -0.023, 0]}>
+      {/* <group
+        position={[-0.207, 0.026, 0.471]}
+        rotation={[0, -0.023, 0]}
+        name="pillow"
+      >
         <mesh
           castShadow
           receiveShadow
@@ -18,11 +137,21 @@ export function Pokeball() {
           geometry={nodes.Cube_1.geometry}
           material={materials.black_stroke}
         />
-      </group>
+      </group> */}
+
       <group
         position={[0.387, -0.098, -0.259]}
         rotation={[-Math.PI / 2, 0, 1.077]}
         scale={0.039}
+        name="bulbasaur"
+        onClick={(e) => setGrabObject(() => (e ? true : false))}
+        onPointerMove={(e) =>
+          isSceneRotate
+            ? false
+            : grabObject
+            ? moveObject(e.eventObject, e.clientX, e.clientY)
+            : false
+        }
       >
         <mesh
           castShadow
