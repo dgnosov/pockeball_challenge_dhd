@@ -5,18 +5,10 @@ import Scene from "./components/Scene";
 import Lights from "./components/Lights";
 import { useEffect, useState } from "react";
 import { MOUSE } from "three/src/Three.js";
-import { useControls } from "leva";
+import { Perf } from "r3f-perf";
 
 function App() {
   const [leftMouse, setLeftMouse] = useState<undefined | MOUSE>(undefined);
-
-  const settings = useControls("CameraTest", {
-    camera: {
-      y: 5,
-      z: 5,
-      x: 0,
-    },
-  });
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.code === "AltLeft") {
@@ -41,8 +33,8 @@ function App() {
   return (
     <Canvas
       camera={{
-        fov: 14,
-        position: [settings.camera.x, settings.camera.y, settings.camera.z],
+        fov: 3,
+        position: [50, 0, 0],
       }}
       shadows={true}
     >

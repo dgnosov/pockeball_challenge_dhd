@@ -3,4 +3,19 @@
   height: 100vh;
   margin: 0;
   padding: 0;
+  background: linear-gradient(316deg, #232d3c, #55a5c4, #2ab4fe, #19dab2);
+  background-size: 240% 240%;
+  animation: gradient-animation 40s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
