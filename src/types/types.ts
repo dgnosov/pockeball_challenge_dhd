@@ -132,3 +132,21 @@ export type GLTFPokeball = GLTF & {
     carpet_3: MeshBasicMaterial;
   };
 };
+
+export type GLTFPokeballTop = GLTF & {
+  nodes: {
+    Sphere001: Mesh;
+    Sphere001_1: Mesh;
+    Sphere003: Mesh;
+    Sphere003_1: Mesh;
+    pockeball_button001: Mesh;
+    pockeball_middle: Mesh;
+    pockeball_middle001: Mesh;
+  };
+  materials: {
+    black_stroke: MeshBasicMaterial;
+    Material_007: MeshBasicMaterial;
+    Material_005: MeshBasicMaterial;
+    Material_002: MeshBasicMaterial;
+  };
+};
