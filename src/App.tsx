@@ -1,12 +1,20 @@
-import { Loader, OrbitControls } from "@react-three/drei";
+import { Effects, Loader, OrbitControls } from "@react-three/drei";
 import "./App.css";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, extend, useThree } from "@react-three/fiber";
 import Scene from "./components/Scene";
 import Lights from "./components/Lights";
 import { Suspense, useEffect, useState } from "react";
 import { MOUSE } from "three/src/Three.js";
 import { Perf } from "r3f-perf";
 import { LoadingScreen } from "./components/LoadingScreen/LoadingScreen";
+import {
+  EffectComposer,
+  Bloom,
+  Noise,
+  Vignette,
+} from "@react-three/postprocessing";
+
+import { GammaCorrectionShader } from "three/examples/jsm/shaders/GammaCorrectionShader.js";
 
 function App() {
   const [leftMouse, setLeftMouse] = useState<undefined | MOUSE>(undefined);
@@ -58,6 +66,7 @@ function App() {
           }}
         />
       </Canvas>
+
       <LoadingScreen started={start} onStarted={() => setStart(true)} />
     </>
   );

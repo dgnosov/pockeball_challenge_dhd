@@ -8,7 +8,7 @@ const Rug: React.FC<Props> = ({}) => {
 
   return (
     <>
-      <group position={[-0.113, -0.08, -0.521]} rotation={[0, 0.43, 0]}>
+      <group position={[-0.113, -0.09, -0.521]} rotation={[0, 0.43, 0]}>
         <mesh
           castShadow
           receiveShadow

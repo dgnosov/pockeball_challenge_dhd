@@ -1,4 +1,5 @@
 import { useFrame } from "@react-three/fiber";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { patchShaders } from "gl-noise";
 import { easing } from "maath";
 import * as React from "react";
