@@ -12,6 +12,7 @@ import {
   Bloom,
   Noise,
   Vignette,
+  BrightnessContrast,
 } from "@react-three/postprocessing";
 
 import { GammaCorrectionShader } from "three/examples/jsm/shaders/GammaCorrectionShader.js";
@@ -53,18 +54,20 @@ function App() {
           fov: 3,
           position: [50, 0, 0],
         }}
-        shadows={true}
+        shadows
       >
         {/* <Perf /> */}
-
         <Scene />
-        <Lights />
         <OrbitControls
           enableRotate
           mouseButtons={{
             LEFT: leftMouse,
           }}
         />
+        {/* <EffectComposer>
+          <BrightnessContrast contrast={0.15} />
+          <Bloom luminanceThreshold={0.85} mipmapBlur />
+        </EffectComposer> */}
       </Canvas>
 
       <LoadingScreen started={start} onStarted={() => setStart(true)} />

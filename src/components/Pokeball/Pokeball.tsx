@@ -9,7 +9,6 @@ export function Pokeball() {
   return (
     <group dispose={null}>
       <Bulbasaur />
-      <Parts />
       <group name="pokeball">
         <group rotation={[0, 0, -Math.PI / 2]}>
           <mesh

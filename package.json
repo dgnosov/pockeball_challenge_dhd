@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "vercel --prod"
   },
   "dependencies": {
     "@react-spring/three": "^9.7.3",
@@ -18,7 +19,7 @@
     "@types/three": "^0.156.0",
     "gl-noise": "^1.6.1",
     "gsap": "^3.12.2",
-    "jotai": "^2.5.1",
+    "jotai": "^2.6.0",
     "leva": "^0.9.35",
     "r3f-perf": "^7.1.2",
     "react": "^18.2.0",
@@ -28,6 +29,7 @@
     "socket.io-client": "^4.7.2",
     "three": "^0.153.0",
     "three-custom-shader-material": "^5.4.0",
+    "vercel": "^32.5.6",
     "vite-plugin-glsl": "^1.1.2",
     "yuka": "^0.7.8"
   },

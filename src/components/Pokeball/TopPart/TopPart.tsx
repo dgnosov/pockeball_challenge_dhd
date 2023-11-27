@@ -1,19 +1,9 @@
 import { useGLTF } from "@react-three/drei";
 import { useState } from "react";
-import { extend, useThree } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
 import gsap from "gsap";
 import { GLTFPokeballTop } from "../../../types/types";
 import DissolveMaterial from "../../DissolveMaterial";
-import {
-  Bloom,
-  DepthOfField,
-  EffectComposer,
-} from "@react-three/postprocessing";
-import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
-import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
-import { GammaCorrectionShader } from "three/examples/jsm/shaders/GammaCorrectionShader.js";
-import { FXAAShader } from "three/examples/jsm/shaders/FXAAShader.js";
-extend({ EffectComposer, ShaderPass, RenderPass });
 
 interface ITopParts {
   handleOffsetPictures: (top: boolean) => void;
@@ -24,7 +14,7 @@ export function TopPart({ handleOffsetPictures }: ITopParts) {
     "./pockeball_top_and_button.glb"
   ) as GLTFPokeballTop;
 
-  const { camera, scene, gl, size } = useThree();
+  const { camera } = useThree();
 
   const [top, setTop] = useState(true);
   const [pokeballTopOffset, setPokeballTopOffset] = useState(true);
@@ -60,9 +50,6 @@ export function TopPart({ handleOffsetPictures }: ITopParts) {
 
   return (
     <group dispose={null}>
-      <EffectComposer>
-        <Bloom mipmapBlur />
-      </EffectComposer>
       <group>
         <group
           position={[-0.003, 0, -0.002]}

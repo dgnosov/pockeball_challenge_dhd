@@ -14,23 +14,8 @@ const Lamp: React.FC<Props> = ({}) => {
           receiveShadow
           geometry={nodes.Cylinder_1.geometry}
           material={materials.lamp}
-        />
-
-        <mesh
-          scale={0.9}
-          position={[-0.1, 0, -0.1]}
-          castShadow
-          receiveShadow
-          geometry={nodes.Cylinder_1.geometry}
-          material={materials.lamp}
         >
-          <meshPhysicalMaterial
-            color={"gold"}
-            roughness={0.2}
-            metalness={0.5}
-            emissive={"white"}
-            emissiveIntensity={6}
-          />
+          <meshStandardMaterial color={[1, 1.1, 1]} toneMapped={false} />
         </mesh>
         <mesh
           castShadow
