@@ -1,21 +1,16 @@
-import { Effects, Loader, OrbitControls } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import "./App.css";
-import { Canvas, extend, useThree } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import Scene from "./components/Scene";
-import Lights from "./components/Lights";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { MOUSE } from "three/src/Three.js";
 import { Perf } from "r3f-perf";
 import { LoadingScreen } from "./components/LoadingScreen/LoadingScreen";
 import {
   EffectComposer,
   Bloom,
-  Noise,
-  Vignette,
   BrightnessContrast,
 } from "@react-three/postprocessing";
-
-import { GammaCorrectionShader } from "three/examples/jsm/shaders/GammaCorrectionShader.js";
 
 function App() {
   const [leftMouse, setLeftMouse] = useState<undefined | MOUSE>(undefined);
@@ -50,6 +45,9 @@ function App() {
   return (
     <>
       <Canvas
+        gl={{
+          antialias: false,
+        }}
         camera={{
           fov: 3,
           position: [50, 0, 0],
@@ -64,10 +62,10 @@ function App() {
             LEFT: leftMouse,
           }}
         />
-        {/* <EffectComposer>
+        <EffectComposer renderPriority={10} resolutionScale={1024}>
           <BrightnessContrast contrast={0.15} />
-          <Bloom luminanceThreshold={0.85} mipmapBlur />
-        </EffectComposer> */}
+          <Bloom mipmapBlur />
+        </EffectComposer>
       </Canvas>
 
       <LoadingScreen started={start} onStarted={() => setStart(true)} />

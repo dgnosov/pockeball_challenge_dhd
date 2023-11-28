@@ -24,7 +24,7 @@ export default function Sparks({ count }: any) {
     return temp;
   }, [count]);
   // The innards of this hook will run every frame
-  useFrame((state) => {
+  useFrame((_) => {
     // Makes the light follow the mouse
     // light.current.position.set(
     //   mouse.current[0] / aspect,
