@@ -1,14 +1,18 @@
 import { useGLTF } from "@react-three/drei";
 import React from "react";
 import { GLTFPokeball } from "../../../types/types";
+import { useAtom } from "jotai";
+import switchLight from "../../../context/Context";
 type Props = {};
 
 const Lamp: React.FC<Props> = ({}) => {
   const { nodes, materials } = useGLTF("./pockeball.glb") as GLTFPokeball;
 
+  const [light, setLight] = useAtom(switchLight);
+
   return (
     <>
-      <group position={[0.104, -0.205, 0.113]}>
+      <group position={[0.104, -0.205, 0.113]} onClick={() => setLight(!light)}>
         <mesh
           castShadow
           receiveShadow

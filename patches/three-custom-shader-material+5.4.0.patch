@@ -1,0 +1,13 @@
+diff --git a/node_modules/three-custom-shader-material/dist/declarations/src/index.d.ts b/node_modules/three-custom-shader-material/dist/declarations/src/index.d.ts
+index 9fe727c..d2797ef 100644
+--- a/node_modules/three-custom-shader-material/dist/declarations/src/index.d.ts
++++ b/node_modules/three-custom-shader-material/dist/declarations/src/index.d.ts
+@@ -6,6 +6,8 @@ declare const _default: <T extends MaterialConstructor>(props: {
+     cacheKey?: (() => string) | undefined;
+     patchMap?: import("./types.js").iCSMPatchMap | undefined;
+     silent?: boolean | undefined;
++    toneMapped?: boolean | undefined;
++    transparent?: boolean | undefined;
+     uniforms?: {
+         [key: string]: import("three").IUniform<any>;
+     } | undefined;
