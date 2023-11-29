@@ -12,7 +12,7 @@ const Scene: React.FC<Props> = ({}) => {
       <Lights />
       <Parts />
       <Pokeball />
-      <Sparks />
+      <Sparks count={10} />
     </>
   );
 };

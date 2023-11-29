@@ -4,6 +4,8 @@ import { useThree } from "@react-three/fiber";
 import gsap from "gsap";
 import { GLTFPokeballTop } from "../../../types/types";
 import DissolveMaterial from "../../DissolveMaterial";
+import switchLight from "../../../context/Context";
+import { useAtom } from "jotai";
 
 interface ITopParts {
   handleOffsetPictures: (top: boolean) => void;
@@ -17,6 +19,7 @@ export function TopPart({ handleOffsetPictures }: ITopParts) {
   const { camera } = useThree();
 
   const [top, setTop] = useState(true);
+  const [_, setLight] = useAtom(switchLight);
   const [pokeballTopOffset, setPokeballTopOffset] = useState(true);
 
   const rotateCamera = () => {
@@ -27,7 +30,7 @@ export function TopPart({ handleOffsetPictures }: ITopParts) {
         y: 0,
         z: 0,
         ease: "power3.inOut",
-        onComplete: () => setPokeballTopOffset(true),
+        onComplete: () => (setPokeballTopOffset(true), setLight(false)),
       });
       return;
     }
@@ -38,7 +41,7 @@ export function TopPart({ handleOffsetPictures }: ITopParts) {
       y: 30,
       z: -10,
       ease: "power3.inOut",
-      onComplete: () => setPokeballTopOffset(false),
+      onComplete: () => (setPokeballTopOffset(false), setLight(true)),
     });
   };
 
