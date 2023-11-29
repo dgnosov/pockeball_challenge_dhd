@@ -1,32 +1,41 @@
 import { useGLTF } from "@react-three/drei";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { GLTFPokeball } from "../../types/types";
 import { Object3DEventMap } from "three";
 import gsap from "gsap";
+import { CustomEase } from "gsap/CustomEase";
+gsap.registerPlugin(CustomEase);
 
 type Props = {};
 
 const Bulbasaur: React.FC<Props> = () => {
   const { nodes, materials } = useGLTF("./pockeball.glb") as GLTFPokeball;
   const bulbasaur = useRef<Object3DEventMap | any>();
+  const [allowJump, setAllowJump] = useState(true);
 
   const jump = () => {
-    gsap.from(bulbasaur.current.position, {
-      duration: 0.5,
-      y: -0.1,
-      ease: "power3.linear",
-    });
+    if (!allowJump) return;
+    setAllowJump(false);
     gsap.to(bulbasaur.current.position, {
-      delay: 0.3,
-      duration: 0.5,
-      y: 0.2,
-      ease: "power3.linear",
+      duration: 2.5,
+      ease: CustomEase.create(
+        "custom",
+        "M0,0 C0,0 0.077,0.588 0.2,0.7 0.302,0.631 0.4,0.194 0.501,-0.011 0.68,0.05 0.939,0 1,-0.05 "
+      ),
+      y: 0.1,
+      onComplete: () => {
+        bulbasaur.current.position.y = -0.1;
+        setAllowJump(true);
+      },
     });
-    gsap.to(bulbasaur.current.position, {
-      delay: 0.8,
-      duration: 0.5,
-      y: -0.1,
-      ease: "power3.linear",
+    gsap.to(bulbasaur.current.rotation, {
+      duration: 1.5,
+      ease: "power3.ease",
+      z: Math.PI * 2 + 1.077,
+      onComplete: () => {
+        bulbasaur.current.rotation.z = 1.077;
+        setAllowJump(true);
+      },
     });
   };
 

@@ -62,10 +62,10 @@ function App() {
             LEFT: leftMouse,
           }}
         />
-        <EffectComposer renderPriority={10} resolutionScale={1024}>
+        {/* <EffectComposer renderPriority={10} resolutionScale={1024}>
           <BrightnessContrast contrast={0.15} />
           <Bloom mipmapBlur />
-        </EffectComposer>
+        </EffectComposer> */}
       </Canvas>
 
       <LoadingScreen started={start} onStarted={() => setStart(true)} />
