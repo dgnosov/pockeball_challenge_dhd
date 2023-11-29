@@ -185,20 +185,6 @@ const FlowersAndMushrooms: React.FC<Props> = ({}) => {
           material={materials.black_stroke}
         />
       </group>
-      <group position={[-0.513, 0.36, -0.189]} rotation={[0, 0.212, 0]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cylinder017.geometry}
-          material={materials.cup}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cylinder017_1.geometry}
-          material={materials.black_stroke}
-        />
-      </group>
       <group position={[-0.641, 0.042, -0.512]}>
         <mesh
           castShadow
@@ -280,75 +266,91 @@ const FlowersAndMushrooms: React.FC<Props> = ({}) => {
           material={materials.black_stroke}
         />
       </group>
-      <group
-        position={[0.188, -0.037, 0.381]}
-        rotation={[-1.601, 1.521, 1.781]}
-      >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Sphere016.geometry}
-          material={materials.mushroom_bottom}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Sphere016_1.geometry}
-          material={materials.black_stroke}
-        />
-      </group>
-      <group
-        position={[-0.479, 0.431, -0.207]}
-        rotation={[1.393, -0.585, 1.256]}
-      >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Plane007.geometry}
-          material={materials.green}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Plane007_1.geometry}
-          material={materials.black_stroke}
-        />
-      </group>
-      <group
-        position={[-0.509, 0.614, -0.186]}
-        rotation={[Math.PI, -0.473, Math.PI]}
-        scale={0.568}
-      >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Icosphere_1.geometry}
-          material={materials.flower_tops}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Icosphere_2.geometry}
-          material={materials.black_stroke}
-        />
-      </group>
-      <group
-        position={[-0.535, 0.426, -0.2]}
-        rotation={[1.261, 0.188, 3.127]}
-        scale={0.379}
-      >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.BezierCurve002.geometry}
-          material={materials.flowers_middle}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.BezierCurve002_1.geometry}
-          material={materials.black_stroke}
-        />
+      <group name="flower_main" position={[0, -0.009, 0]}>
+        <group position={[-0.513, 0.36, -0.189]} rotation={[0, 0.212, 0]}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Cylinder017.geometry}
+            material={materials.cup}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Cylinder017_1.geometry}
+            material={materials.black_stroke}
+          />
+        </group>
+        <group
+          position={[0.188, -0.037, 0.381]}
+          rotation={[-1.601, 1.521, 1.781]}
+        >
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Sphere016.geometry}
+            material={materials.mushroom_bottom}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Sphere016_1.geometry}
+            material={materials.black_stroke}
+          />
+        </group>
+        <group
+          position={[-0.479, 0.431, -0.207]}
+          rotation={[1.393, -0.585, 1.256]}
+        >
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Plane007.geometry}
+            material={materials.green}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Plane007_1.geometry}
+            material={materials.black_stroke}
+          />
+        </group>
+        <group
+          position={[-0.509, 0.614, -0.186]}
+          rotation={[Math.PI, -0.473, Math.PI]}
+          scale={0.568}
+        >
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Icosphere_1.geometry}
+            material={materials.flower_tops}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Icosphere_2.geometry}
+            material={materials.black_stroke}
+          />
+        </group>
+        <group
+          position={[-0.535, 0.426, -0.2]}
+          rotation={[1.261, 0.188, 3.127]}
+          scale={0.379}
+        >
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.BezierCurve002.geometry}
+            material={materials.flowers_middle}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.BezierCurve002_1.geometry}
+            material={materials.black_stroke}
+          />
+        </group>
       </group>{" "}
     </>
   );

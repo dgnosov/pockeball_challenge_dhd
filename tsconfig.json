@@ -22,5 +22,6 @@
   },
   "files": ["node_modules/gsap/types/index.d.ts"],
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "typeRoots": ["node_modules/@types", "custom_typings/"]
 }

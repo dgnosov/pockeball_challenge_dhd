@@ -7,7 +7,7 @@ const Closet: React.FC<Props> = ({}) => {
   const { nodes, materials } = useGLTF("./pockeball.glb") as GLTFPokeball;
 
   return (
-    <>
+    <group name="closet" position={[0, -0.0111, 0]}>
       <group position={[-0.284, 0.111, -0.207]}>
         <mesh
           castShadow
@@ -179,7 +179,7 @@ const Closet: React.FC<Props> = ({}) => {
           material={materials.black_stroke}
         />
       </group>
-    </>
+    </group>
   );
 };
 export default Closet;

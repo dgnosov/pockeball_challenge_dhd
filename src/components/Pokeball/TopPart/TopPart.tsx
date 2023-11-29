@@ -1,9 +1,16 @@
 import { useGLTF } from "@react-three/drei";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useThree } from "@react-three/fiber";
 import gsap from "gsap";
 import { GLTFPokeballTop } from "../../../types/types";
 import DissolveMaterial from "../../DissolveMaterial";
+import switchLight from "../../../context/Context";
+import { useAtom } from "jotai";
+import clickAudio from "../../../assets/click.mp3";
+import appearAudio from "../../../assets/appear.mp3";
+
+const click = new Audio(clickAudio);
+const appear = new Audio(appearAudio);
 
 interface ITopParts {
   handleOffsetPictures: (top: boolean) => void;
@@ -17,7 +24,9 @@ export function TopPart({ handleOffsetPictures }: ITopParts) {
   const { camera } = useThree();
 
   const [top, setTop] = useState(true);
+  const [_, setLight] = useAtom(switchLight);
   const [pokeballTopOffset, setPokeballTopOffset] = useState(true);
+  const [lock, setLock] = useState(false);
 
   const rotateCamera = () => {
     if (!top) {
@@ -27,7 +36,7 @@ export function TopPart({ handleOffsetPictures }: ITopParts) {
         y: 0,
         z: 0,
         ease: "power3.inOut",
-        onComplete: () => setPokeballTopOffset(true),
+        onComplete: () => (setPokeballTopOffset(true), setLight(false)),
       });
       return;
     }
@@ -38,15 +47,26 @@ export function TopPart({ handleOffsetPictures }: ITopParts) {
       y: 30,
       z: -10,
       ease: "power3.inOut",
-      onComplete: () => setPokeballTopOffset(false),
+      onComplete: () => (setPokeballTopOffset(false), setLight(true)),
     });
   };
 
   const handleOpenPokeball = () => {
+    if (!lock) return;
+    setLock(false);
     setTop(!top);
     rotateCamera();
     handleOffsetPictures(top);
+    click.play();
+    appear.play();
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLock(true);
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, [lock]);
 
   return (
     <group dispose={null}>
@@ -69,10 +89,7 @@ export function TopPart({ handleOffsetPictures }: ITopParts) {
             material={materials.Material_007}
           />
         </group>
-        <group
-          rotation={[-3.138, 0, -Math.PI / 2]}
-          //   position={[0, pokeballTopOffset ? -1 : 0, 0]}
-        >
+        <group rotation={[-3.138, 0, -Math.PI / 2]}>
           <mesh
             castShadow
             receiveShadow
@@ -107,7 +124,7 @@ export function TopPart({ handleOffsetPictures }: ITopParts) {
           receiveShadow
           geometry={nodes.pockeball_button001.geometry}
           material={materials.Material_007}
-          position={[top ? 0.003 : -0.05, 0, -0.002]}
+          position={[top ? 0.003 : -0.03, 0, -0.002]}
           rotation={[0, 0, -Math.PI / 2]}
           scale={0.961}
         />

@@ -1,13 +1,17 @@
 import { useFrame, useThree } from "@react-three/fiber";
+import { useAtom } from "jotai";
 import { useMemo, useRef } from "react";
 import { Object3D } from "three";
+import switchLight from "../context/Context";
 
 export default function Sparks({ count }: any) {
+  const [lightLamp] = useAtom(switchLight);
+
   const mesh = useRef<any>();
+  const sparksPosition = useRef<any>(1000);
   const light = useRef();
   const { size, viewport } = useThree();
   const aspect = size.width / viewport.width;
-
   const dummy = useMemo(() => new Object3D(), []);
   // Generate some random positions, speed factors and timings
   const particles = useMemo(() => {
@@ -24,7 +28,28 @@ export default function Sparks({ count }: any) {
     return temp;
   }, [count]);
   // The innards of this hook will run every frame
+
+  // TODO try to add GSAP
+  const offsetSparkles = () => {
+    if (!lightLamp) {
+      sparksPosition.current = sparksPosition.current - 10;
+      if (sparksPosition.current <= 1) {
+        sparksPosition.current = 1;
+      }
+      return;
+    }
+
+    if (lightLamp) {
+      sparksPosition.current = sparksPosition.current + 10;
+      if (sparksPosition.current >= 1000) {
+        sparksPosition.current = 1000;
+      }
+    }
+  };
+
   useFrame((_) => {
+    offsetSparkles();
+    // console.log("sparksPosition.current", sparksPosition.current);
     // Makes the light follow the mouse
     // light.current.position.set(
     //   mouse.current[0] / aspect,
@@ -45,15 +70,15 @@ export default function Sparks({ count }: any) {
       dummy.position.set(
         (particle.mx / 100) * a +
           xFactor +
-          Math.cos((t / 1000) * factor) +
+          Math.cos((t / sparksPosition.current) * factor) +
           (Math.sin(t * 1) * factor) / 4,
         (particle.my / 100) * b +
           yFactor +
-          Math.sin((t / 1000) * factor) +
+          Math.sin((t / sparksPosition.current) * factor) +
           (Math.cos(t * 2) * factor) / 4,
         (particle.my / 100) * b +
           zFactor +
-          Math.cos((t / 1000) * factor) +
+          Math.cos((t / sparksPosition.current) * factor) +
           (Math.sin(t * 3) * factor) / 4
       );
       dummy.scale.set(s / 20, s / 20, s / 20);
@@ -70,7 +95,7 @@ export default function Sparks({ count }: any) {
     <group position={[-0.95, 0.3, -0.28]}>
       <instancedMesh ref={mesh} args={[undefined, undefined, count]}>
         <dodecahedronBufferGeometry attach="geometry" args={[0.1, 0]} />
-        <meshPhongMaterial attach="material" color="#eee" />
+        <meshPhongMaterial toneMapped={false} color={[1, 1.1, 1]} />
       </instancedMesh>
     </group>
   );

@@ -4,15 +4,23 @@ import { GLTFPokeball } from "../../../types/types";
 import { useAtom } from "jotai";
 import switchLight from "../../../context/Context";
 type Props = {};
+import clickAudio from "../../../assets/click.mp3";
+
+const click = new Audio(clickAudio);
 
 const Lamp: React.FC<Props> = ({}) => {
   const { nodes, materials } = useGLTF("./pockeball.glb") as GLTFPokeball;
 
   const [light, setLight] = useAtom(switchLight);
 
+  const handleLight = () => {
+    setLight(!light);
+    click.play();
+  };
+
   return (
     <>
-      <group position={[0.104, -0.205, 0.113]} onClick={() => setLight(!light)}>
+      <group position={[0.104, -0.205, 0.113]} onClick={() => handleLight()}>
         <mesh
           castShadow
           receiveShadow

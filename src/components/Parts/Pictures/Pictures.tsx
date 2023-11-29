@@ -1,10 +1,13 @@
 import { useGLTF } from "@react-three/drei";
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import { GLTFPokeball } from "../../../types/types";
-import { Group } from "three/examples/jsm/libs/tween.module.js";
 import { Object3DEventMap } from "three";
 import gsap from "gsap";
 import { useFrame } from "@react-three/fiber";
+import kickAudio from "../../../assets/kick.mp3";
+
+const kick = new Audio(kickAudio);
+
 type Props = {
   offsetPuctures: boolean;
 };
@@ -43,11 +46,12 @@ const Pictures: React.FC<Props> = ({ offsetPuctures }) => {
     picture_2.current.position.y = 0.3 + Math.sin(time) / 60;
   });
 
-  const [permissionToRotate, setPermissionToRotate] = useState(true);
+  const [permissionToRotate_1, setPermissionToRotate_1] = useState(true);
+  const [permissionToRotate_2, setPermissionToRotate_2] = useState(true);
 
-  const rotate = (picture: MutableRefObject<any>) => {
-    if (!permissionToRotate) return;
-    setPermissionToRotate(false);
+  const rotate_picture_1 = (picture: MutableRefObject<any>) => {
+    if (!permissionToRotate_1) return;
+    setPermissionToRotate_1(false);
     gsap.to(picture.current.rotation, {
       duration: 2,
       x: 0,
@@ -56,15 +60,33 @@ const Pictures: React.FC<Props> = ({ offsetPuctures }) => {
       ease: "power3.linear",
       onComplete: () => {
         picture.current.rotation.y = -0.151;
-        setPermissionToRotate(true);
+        setPermissionToRotate_1(true);
       },
     });
+    kick.play();
+  };
+
+  const rotate_picture_2 = (picture: MutableRefObject<any>) => {
+    if (!permissionToRotate_2) return;
+    setPermissionToRotate_2(false);
+    gsap.to(picture.current.rotation, {
+      duration: 2,
+      x: 0,
+      y: -0.151 + Math.PI * 2,
+      z: 0,
+      ease: "power3.linear",
+      onComplete: () => {
+        picture.current.rotation.y = -0.151;
+        setPermissionToRotate_2(true);
+      },
+    });
+    kick.play();
   };
 
   return (
     <group ref={pictures}>
       <group
-        onClick={() => rotate(picture_1)}
+        onClick={() => rotate_picture_1(picture_1)}
         ref={picture_1}
         position={[-0.641, 0.365, 0.73]}
         rotation={[0, -0.151, 0]}
@@ -83,7 +105,7 @@ const Pictures: React.FC<Props> = ({ offsetPuctures }) => {
         />
       </group>
       <group
-        onClick={() => rotate(picture_2)}
+        onClick={() => rotate_picture_2(picture_2)}
         ref={picture_2}
         position={[-0.841, 0.365, 0.495]}
         rotation={[0, -0.485, 0]}
