@@ -4,6 +4,10 @@ import { GLTFPokeball } from "../../types/types";
 import { Object3DEventMap } from "three";
 import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase";
+import jumpAudiomp3 from "../../assets/jump.mp3";
+
+const jumpAudio = new Audio(jumpAudiomp3);
+
 gsap.registerPlugin(CustomEase);
 
 type Props = {};
@@ -16,6 +20,7 @@ const Bulbasaur: React.FC<Props> = () => {
   const jump = () => {
     if (!allowJump) return;
     setAllowJump(false);
+    jumpAudio.play();
     gsap.to(bulbasaur.current.position, {
       duration: 2.5,
       ease: CustomEase.create(

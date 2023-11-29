@@ -1,10 +1,13 @@
 import { useGLTF } from "@react-three/drei";
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import { GLTFPokeball } from "../../../types/types";
-import { Group } from "three/examples/jsm/libs/tween.module.js";
 import { Object3DEventMap } from "three";
 import gsap from "gsap";
 import { useFrame } from "@react-three/fiber";
+import kickAudio from "../../../assets/kick.mp3";
+
+const kick = new Audio(kickAudio);
+
 type Props = {
   offsetPuctures: boolean;
 };
@@ -60,6 +63,7 @@ const Pictures: React.FC<Props> = ({ offsetPuctures }) => {
         setPermissionToRotate_1(true);
       },
     });
+    kick.play();
   };
 
   const rotate_picture_2 = (picture: MutableRefObject<any>) => {
@@ -76,6 +80,7 @@ const Pictures: React.FC<Props> = ({ offsetPuctures }) => {
         setPermissionToRotate_2(true);
       },
     });
+    kick.play();
   };
 
   return (
