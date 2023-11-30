@@ -48,6 +48,8 @@ const Bulbasaur: React.FC<Props> = () => {
     <group
       ref={bulbasaur}
       onClick={() => jump()}
+      onPointerEnter={() => (document.body.style.cursor = "pointer")}
+      onPointerLeave={() => (document.body.style.cursor = "default")}
       position={[0.387, -0.1, -0.259]}
       rotation={[-Math.PI / 2, 0, 1.077]}
       name="bulbasaur"

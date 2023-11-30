@@ -87,6 +87,8 @@ const Pictures: React.FC<Props> = ({ offsetPuctures }) => {
     <group ref={pictures}>
       <group
         onClick={() => rotate_picture_1(picture_1)}
+        onPointerEnter={() => (document.body.style.cursor = "pointer")}
+        onPointerLeave={() => (document.body.style.cursor = "default")}
         ref={picture_1}
         position={[-0.641, 0.365, 0.73]}
         rotation={[0, -0.151, 0]}
@@ -106,6 +108,8 @@ const Pictures: React.FC<Props> = ({ offsetPuctures }) => {
       </group>
       <group
         onClick={() => rotate_picture_2(picture_2)}
+        onPointerEnter={() => (document.body.style.cursor = "pointer")}
+        onPointerLeave={() => (document.body.style.cursor = "default")}
         ref={picture_2}
         position={[-0.841, 0.365, 0.495]}
         rotation={[0, -0.485, 0]}

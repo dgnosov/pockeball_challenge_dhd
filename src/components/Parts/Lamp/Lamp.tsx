@@ -20,7 +20,12 @@ const Lamp: React.FC<Props> = ({}) => {
 
   return (
     <>
-      <group position={[0.104, -0.205, 0.113]} onClick={() => handleLight()}>
+      <group
+        position={[0.104, -0.205, 0.113]}
+        onClick={() => handleLight()}
+        onPointerEnter={() => (document.body.style.cursor = "pointer")}
+        onPointerLeave={() => (document.body.style.cursor = "default")}
+      >
         <mesh
           castShadow
           receiveShadow

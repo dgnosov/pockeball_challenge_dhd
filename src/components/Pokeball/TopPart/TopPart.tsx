@@ -89,7 +89,10 @@ export function TopPart({ handleOffsetPictures }: ITopParts) {
             material={materials.Material_007}
           />
         </group>
-        <group rotation={[-3.138, 0, -Math.PI / 2]}>
+        <group
+          rotation={[-3.138, 0, -Math.PI / 2]}
+          onClick={(e) => e.stopPropagation()}
+        >
           <mesh
             castShadow
             receiveShadow
@@ -120,6 +123,8 @@ export function TopPart({ handleOffsetPictures }: ITopParts) {
         <mesh
           name="button"
           onClick={() => handleOpenPokeball()}
+          onPointerEnter={() => (document.body.style.cursor = "pointer")}
+          onPointerLeave={() => (document.body.style.cursor = "default")}
           castShadow
           receiveShadow
           geometry={nodes.pockeball_button001.geometry}
