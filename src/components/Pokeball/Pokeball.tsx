@@ -9,7 +9,7 @@ export function Pokeball() {
   return (
     <group dispose={null}>
       <Bulbasaur />
-      <group name="pokeball">
+      <group name="pokeball" onClick={(e) => e.stopPropagation()}>
         <group rotation={[0, 0, -Math.PI / 2]}>
           <mesh
             castShadow
